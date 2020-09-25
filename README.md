@@ -1,6 +1,6 @@
 ## Laravel Best Practice
 
-*Environment variable*
+**Environment variable**
 
 Gunakan file `.env` untuk menyimpan beberapa informasi penting dan memanggilnya melalui fungsi `env`. Kita tidak dibenarkan membuat atau meletakkan informasi penting di dalam controller dan model apalagi sampai push ke Git.
 
@@ -39,3 +39,46 @@ class DomainController extends Controller
     }
 }
 ```
+
+
+
+**Package Configuration**
+
+Disarankan menggunakan `snake_case` untuk penamaan file configuration, kurang lebih contohnya seperti berikut ini :
+
+Contoh Baik :
+
+```
+config/my_config.php
+```
+
+Contoh Buruk :
+
+```
+config/MyConfig.php
+```
+
+Kemudian gunakan juga index file config menggunakan `snake_case`, kurang lebih seperti berikut ini :
+
+Contoh Baik :
+
+```
+return [
+    'my_api' => [
+        'domain' => env('API_DOMAIN'),
+        'secret' => env('API_SECRET'),
+    ]
+]
+```
+
+Contoh Buruk :
+
+```
+return [
+    'MyApi' => [
+        'DOMAIN' => env('API_DOMAIN'),
+        'SECRET' => env('API_SECRET'),
+    ]
+]
+```
+
