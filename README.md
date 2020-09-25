@@ -120,3 +120,46 @@ class Article extends Controller
 
 ------
 
+Gunakan penamaan nama method/function dari Resources Controller kurang lebih seperti berikut ini :
+
+Contoh Baik :
+
+```
+class ArticleController extends Controller
+{
+    public function index()
+    {
+        // list articles
+    }
+ 
+    public function create()
+    {
+        // show create form
+    } 
+
+    public function store(Request $request)
+    {
+        // handle the form POST
+    } 
+
+    public function show($id)
+    {
+        // show a single article
+    } 
+
+    public function edit($id)
+    {
+        // show edit page
+    } 
+
+    public function update(Request $request, $id)
+    {
+        // handle show edit page POST
+    } 
+
+    public function destroy($id)
+    {
+        // delete a article
+    } 
+}
+```
