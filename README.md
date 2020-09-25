@@ -82,3 +82,22 @@ return [
 ]
 ```
 
+
+
+**Naming Conventions**
+
+Pada bagian ini kita akan belajar tentang Naming Conventions atau penamaan yang benar sesuai dengan mengikuti umumnya dari para komunitas Laravel di seluruh Dunia.
+
+**Controllers**
+
+Nama controller umumnya dimulai dengan kata benda dalam bentuk tunggal (singular) kemudian diikuti dengan kata, kurang lebih contonya seperti berikut ini :
+
+Contoh Baik :
+
+```
+class ArticleController extends Controller
+{
+    ...
+}
+```
+
