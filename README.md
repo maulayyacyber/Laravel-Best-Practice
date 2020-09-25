@@ -82,3 +82,47 @@ return [
 ]
 ```
 
+**Fat models, skinny controllers**
+
+Letakkan semua logika terkait DB ke dalam model Eloquent atau ke dalam kelas Repositori jika Anda menggunakan Query Builder atau query Sql.
+
+Contoh Buruk :
+
+```
+public function index()
+{
+    $clients = Client::verified()
+        ->with(['orders' => function ($q) {
+            $q->where('created_at', '>', Carbon::today()->subWeek());
+        }])
+        ->get();
+
+    return view('index', ['clients' => $clients]);
+}
+```
+
+Contoh Baik :
+
+```
+// app/Http/Controllers/ClientController.php
+
+public function index()
+{
+    return view('index', ['clients' => $this->client->getWithNewOrders()]);
+}
+
+
+// app/Models/Client.php
+
+class Client extends Model
+{
+    public function getWithNewOrders()
+    {
+        return $this->verified()
+            ->with(['orders' => function ($q) {
+                $q->where('created_at', '>', Carbon::today()->subWeek());
+            }])
+            ->get();
+    }
+}
+```
