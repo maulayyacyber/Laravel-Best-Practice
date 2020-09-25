@@ -101,3 +101,22 @@ class ArticleController extends Controller
 }
 ```
 
+Contoh Buruk :
+
+```
+class ArticlesController extends Controller
+{
+    ...
+}
+class wp_articlesController extends Controller
+{
+    ...
+}
+class Article extends Controller
+{
+    ...
+}
+```
+
+------
+
