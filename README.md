@@ -205,6 +205,44 @@ class ArticleController extends Controller
 }
 ```
 
+**Validation**
+
+Contoh Buruk :
+
+```
+public function store(Request $request)
+{
+    $request->validate([
+        'title' => 'required|unique:posts|max:255',
+        'body' => 'required',
+        'publish_at' => 'nullable|date',
+    ]);
+
+    ....
+}
+```
+
+Contoh Baik : 
+
+```
+public function store(PostRequest $request)
+{    
+    ....
+}
+
+class PostRequest extends Request
+{
+    public function rules()
+    {
+        return [
+            'title' => 'required|unique:posts|max:255',
+            'body' => 'required',
+            'publish_at' => 'nullable|date',
+        ];
+    }
+}
+```
+
 **Naming Conventions**
 
 Pada bagian ini kita akan belajar tentang Naming Conventions atau penamaan yang benar sesuai dengan mengikuti umumnya dari para komunitas Laravel di seluruh Dunia.
@@ -238,8 +276,6 @@ class Article extends Controller
     ...
 }
 ```
-
-------
 
 Gunakan penamaan nama method/function dari Resources Controller kurang lebih seperti berikut ini :
 
@@ -311,8 +347,6 @@ class ArticleController extends Controller
     } 
 }
 ```
-
-------
 
 **Model**
 
