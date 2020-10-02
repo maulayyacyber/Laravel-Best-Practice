@@ -359,4 +359,3 @@ class Flight extends Model
 {
     ...
 }
-```
