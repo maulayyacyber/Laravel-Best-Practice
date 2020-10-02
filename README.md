@@ -242,3 +242,121 @@ class PostRequest extends Request
     }
 }
 ```
+
+**Naming Conventions**
+
+Pada bagian ini kita akan belajar tentang Naming Conventions atau penamaan yang benar sesuai dengan mengikuti umumnya dari para komunitas Laravel di seluruh Dunia.
+
+**Controllers**
+
+Nama controller umumnya dimulai dengan kata benda dalam bentuk tunggal (singular) kemudian diikuti dengan kata, kurang lebih contonya seperti berikut ini :
+
+Contoh Baik :
+
+```
+class ArticleController extends Controller
+{
+    ...
+}
+```
+
+Contoh Buruk :
+
+```
+class ArticlesController extends Controller
+{
+    ...
+}
+class wp_articlesController extends Controller
+{
+    ...
+}
+class Article extends Controller
+{
+    ...
+}
+```
+
+Gunakan penamaan nama method/function dari Resources Controller kurang lebih seperti berikut ini :
+
+Contoh Baik :
+
+```
+class ArticleController extends Controller
+{
+    public function index()
+    {
+        // list articles
+    }
+ 
+    public function create()
+    {
+        // show create form
+    } 
+
+    public function store(Request $request)
+    {
+        // handle the form POST
+    } 
+
+    public function show($id)
+    {
+        // show a single article
+    } 
+
+    public function edit($id)
+    {
+        // show edit page
+    } 
+
+    public function update(Request $request, $id)
+    {
+        // handle show edit page POST
+    } 
+
+    public function destroy($id)
+    {
+        // delete a article
+    } 
+}
+```
+
+Contoh Buruk :
+
+```
+class ArticleController extends Controller
+{
+    public function list()
+    {
+        // list articles
+    } 
+
+    public function create_or_save()
+    {
+        // show create form then handle save
+    } 
+
+    public function show_edit($id)
+    {
+        // show a single article then show edit page
+    } 
+
+    public function delete($id)
+    {
+        // delete a article
+    } 
+}
+```
+
+**Model**
+
+Nama model harus dalam bentuk tunggal (singular) dengan huruf pertama dalam huruf besar, contohnya seperti berikut ini :
+
+Contoh Baik :
+
+```
+class Flight extends Model
+{
+    ...
+}
+```
