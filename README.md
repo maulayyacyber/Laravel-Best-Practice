@@ -205,6 +205,44 @@ class ArticleController extends Controller
 }
 ```
 
+**Validation**
+
+Contoh Buruk :
+
+```
+public function store(Request $request)
+{
+    $request->validate([
+        'title' => 'required|unique:posts|max:255',
+        'body' => 'required',
+        'publish_at' => 'nullable|date',
+    ]);
+
+    ....
+}
+```
+
+Contoh Baik : 
+
+```
+public function store(PostRequest $request)
+{    
+    ....
+}
+
+class PostRequest extends Request
+{
+    public function rules()
+    {
+        return [
+            'title' => 'required|unique:posts|max:255',
+            'body' => 'required',
+            'publish_at' => 'nullable|date',
+        ];
+    }
+}
+```
+
 **Naming Conventions**
 
 Pada bagian ini kita akan belajar tentang Naming Conventions atau penamaan yang benar sesuai dengan mengikuti umumnya dari para komunitas Laravel di seluruh Dunia.
@@ -238,8 +276,6 @@ class Article extends Controller
     ...
 }
 ```
-
-------
 
 Gunakan penamaan nama method/function dari Resources Controller kurang lebih seperti berikut ini :
 
@@ -312,8 +348,6 @@ class ArticleController extends Controller
 }
 ```
 
-------
-
 **Model**
 
 Nama model harus dalam bentuk tunggal (singular) dengan huruf pertama dalam huruf besar, contohnya seperti berikut ini :
@@ -325,193 +359,3 @@ class Flight extends Model
 {
     ...
 }
-```
-
-Contoh Buruk :
-
-```
-class Flights extends Model
-{
-    ...
-}
-class flight extends Model
-{
-    ...
-}
-```
-
-------
-
-Method Relationship `hasOne` atau `belongsTo` harus dalam bentuk tunggal (singular), contohnya seperti berikut ini :
-
-Contoh Baik :
-
-```
-class User extends Model
-{
-    public function phone()
-    {
-        return $this->hasOne('App\Phone');
-    }
-}
-```
-
-Contoh Buruk :
-
-```
-class User extends Model
-{
-    public function phones()
-    {
-        return $this->hasOne('App\Phone');
-    }
-}
-```
-
-------
-
-Kemudian method untuk Relationship selain diatas harus ditulis dengan jamak (plural), kurang lebih seperti berikut ini :
-
-Contoh Baik :
-
-```
-class Post extends Model
-{
-    public function comments()
-    {
-        return $this->hasMany('App\Comment');
-    }
-}
-```
-
-Contoh Buruk :
-
-```
-class Post extends Model
-{
-    public function comment()
-    {
-        return $this->hasMany('App\Comment');
-    }
-}
-```
-
-------
-
-Dan untuk properti yang ada di dalam Model harus ditulis menggunakan `snake_case`, kurang lebih seperti berikut ini :
-
-Contoh Baik :
-
-```
-$user->created_at
-```
-
-Contoh Buruk :
-
-```
-$user->createdAt
-```
-
-------
-
-Penamaan method di dalam Model diharuskan menggunakan `camelCase`, kurang lebih seperti berikut ini :
-
-Contoh Baik :
-
-```
-class User extends Model
-{
-    public function scopePopular($query)
-    {
-        return $query->where('votes', '>', 100);
-    }
-}
-```
-
-Contoh Buruk :
-
-```
-class User extends Model
-{
-    public function scope_popular($query)
-    {
-        return $query->where('votes', '>', 100);
-    }
-}
-```
-
-------
-
-------
-
-**Functions**
-
-Secara default Laravel sudah memiliki banyak sekali fungsi helper yang sangat berguna, akan tetapi kita juga bisa membuat helper kita sendiri di Laravel. Dan berikut ini contoh membuat helper yang baik sesuai dengan Best Practices.
-
-Contoh Baik :
-
-```
-project_folder/app/helper.php
-project_folder/app/Http/helper.php
-```
-
-Contoh Buruk :
-
-```
-project_folder/functions.php
-```
-
-------
-
-Kemudian untuk load sebuah function kita dapat menggunakan `Composer autoload`, kurang lebih seperti berikut ini :
-
-Contoh Baik :
-
-```
-// file composer.json
-
-...
-"autoload": {
-    "files": [
-        "app/helpers.php"
-    ],
-...
-```
-
-Contoh Buruk :
-
-```
-// file app/Http/Controllers/HomeController.php
-
-class HomeController.php
-{
-    function index()
-    {
-        require_once(app_path("helpers.php"));
-    }
-}
-```
-
-------
-
-Dan untuk function helper kita harus memberikan kondisi pengecekan sebelum menentukannya. Kurang lebih seperti berikut ini :
-
-Contoh Baik :
-
-```
-if (! function_exists('my_custom_helper')) {
-    function my_custom_helper($key, $default = null) {
-        // ...
-    }
-}
-```
-
-Contoh Buruk :
-
-```
-function my_custom_helper($key, $default = null) {
-    // ...
-}
-```
-
-------
