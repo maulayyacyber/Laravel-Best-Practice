@@ -359,3 +359,21 @@ class Flight extends Model
 {
     ...
 }
+
+```
+
+Contoh Buruk :
+
+```
+class Flights extends Model
+{
+    ...
+}
+class flight extends Model
+{
+    ...
+}
+```
+
+------
+
