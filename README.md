@@ -478,3 +478,75 @@ class User extends Model
 ```
 
 ------
+
+**Functions**
+
+Secara default Laravel sudah memiliki banyak sekali fungsi helper yang sangat berguna, akan tetapi kita juga bisa membuat helper kita sendiri di Laravel. Dan berikut ini contoh membuat helper yang baik sesuai dengan Best Practices.
+
+Contoh Baik :
+
+```
+project_folder/app/helper.php
+project_folder/app/Http/helper.php
+```
+
+Contoh Buruk :
+
+```
+project_folder/functions.php
+```
+
+------
+
+Kemudian untuk load sebuah function kita dapat menggunakan `Composer autoload`, kurang lebih seperti berikut ini :
+
+Contoh Baik :
+
+```
+// file composer.json
+
+...
+"autoload": {
+    "files": [
+        "app/helpers.php"
+    ],
+...
+```
+
+Contoh Buruk :
+
+```
+// file app/Http/Controllers/HomeController.php
+
+class HomeController.php
+{
+    function index()
+    {
+        require_once(app_path("helpers.php"));
+    }
+}
+```
+
+------
+
+Dan untuk function helper kita harus memberikan kondisi pengecekan sebelum menentukannya. Kurang lebih seperti berikut ini :
+
+Contoh Baik :
+
+```
+if (! function_exists('my_custom_helper')) {
+    function my_custom_helper($key, $default = null) {
+        // ...
+    }
+}
+```
+
+Contoh Buruk :
+
+```
+function my_custom_helper($key, $default = null) {
+    // ...
+}
+```
+
+------
