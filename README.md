@@ -314,3 +314,15 @@ class ArticleController extends Controller
 
 ------
 
+**Model**
+
+Nama model harus dalam bentuk tunggal (singular) dengan huruf pertama dalam huruf besar, contohnya seperti berikut ini :
+
+Contoh Baik :
+
+```
+class Flight extends Model
+{
+    ...
+}
+```
