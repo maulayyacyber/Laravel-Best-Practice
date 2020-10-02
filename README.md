@@ -204,3 +204,41 @@ class ArticleController extends Controller
     } 
 }
 ```
+
+**Validation**
+
+Contoh Buruk :
+
+```
+public function store(Request $request)
+{
+    $request->validate([
+        'title' => 'required|unique:posts|max:255',
+        'body' => 'required',
+        'publish_at' => 'nullable|date',
+    ]);
+
+    ....
+}
+```
+
+Contoh Baik : 
+
+```
+public function store(PostRequest $request)
+{    
+    ....
+}
+
+class PostRequest extends Request
+{
+    public function rules()
+    {
+        return [
+            'title' => 'required|unique:posts|max:255',
+            'body' => 'required',
+            'publish_at' => 'nullable|date',
+        ];
+    }
+}
+```
