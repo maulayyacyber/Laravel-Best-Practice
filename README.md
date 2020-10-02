@@ -339,3 +339,105 @@ class flight extends Model
     ...
 }
 ```
+
+------
+
+Method Relationship `hasOne` atau `belongsTo` harus dalam bentuk tunggal (singular), contohnya seperti berikut ini :
+
+Contoh Baik :
+
+```
+class User extends Model
+{
+    public function phone()
+    {
+        return $this->hasOne('App\Phone');
+    }
+}
+```
+
+Contoh Buruk :
+
+```
+class User extends Model
+{
+    public function phones()
+    {
+        return $this->hasOne('App\Phone');
+    }
+}
+```
+
+------
+
+Kemudian method untuk Relationship selain diatas harus ditulis dengan jamak (plural), kurang lebih seperti berikut ini :
+
+Contoh Baik :
+
+```
+class Post extends Model
+{
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
+}
+```
+
+Contoh Buruk :
+
+```
+class Post extends Model
+{
+    public function comment()
+    {
+        return $this->hasMany('App\Comment');
+    }
+}
+```
+
+------
+
+Dan untuk properti yang ada di dalam Model harus ditulis menggunakan `snake_case`, kurang lebih seperti berikut ini :
+
+Contoh Baik :
+
+```
+$user->created_at
+```
+
+Contoh Buruk :
+
+```
+$user->createdAt
+```
+
+------
+
+Penamaan method di dalam Model diharuskan menggunakan `camelCase`, kurang lebih seperti berikut ini :
+
+Contoh Baik :
+
+```
+class User extends Model
+{
+    public function scopePopular($query)
+    {
+        return $query->where('votes', '>', 100);
+    }
+}
+```
+
+Contoh Buruk :
+
+```
+class User extends Model
+{
+    public function scope_popular($query)
+    {
+        return $query->where('votes', '>', 100);
+    }
+}
+```
+
+------
